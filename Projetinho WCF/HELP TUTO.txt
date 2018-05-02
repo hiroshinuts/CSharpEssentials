@@ -1,0 +1,59 @@
+# Criação do Projeto Passagens
+# Dao Mockado apenas para Exemplo
+# Criar Classe Pojo, deve assinar o Contrato [DataContract]
+# Atributos da Classe Pojo, deve Assinar como trafego de Informações [DataMember]
+# Criar Interface (IClienteService)
+# Interface deve assinar o contrato do WCF [ServiceContract]
+# Metódos da Interface deve seguir o contrato [OperationContract]
+
+#Compilar para gerar a dll
+
+## App.Config
+# botão direito no mouse em cima do app.config , "edit WCF configuration"
+# Na pasta Service, do appconfig colocar a dll da entidade para definir o nome do servico
+# na pasta service, Pasta endPoints , passar a caracteristicas
+	- endereço (adress)
+	- Binding (basicHttpBinding)
+	- Contract (qual contrato define o que o serviço expoe)
+
+## Deixando o serviço Online
+
+
+############## Projeto Hosting ###############
+## Tipo Console Application
+## Adicionar Referencias ClienteService
+## Adicionar Referencia Service Model no projeto
+## using System.ServiceModel
+## Set o Hosting como Startup Project
+## Criando EndPoint
+#  Uri (http://enderecoDoSeuServico:8080/clientes)
+#  chamar o metodo host.AddServiceEndpoint(typeof(IClienteService, new BasicHttpBinding, endereco));
+#  Configurar para exibir os metodos de serviço 
+#  Acessar o endereço http://localhost:8080
+#  Editar appconfig do ClienteService 
+#  Services/Passagens/Host
+#  Passar o endereço base (BaseAdress) // http://localhost:8080
+
+############## Consumindo o Serviço ##############
+##Criando Projeto ConsumindoServico
+##WindowsForm
+
+############# Servico Acessado pelo Browser########
+# Anotation WebInvoke no servico (Passagens)
+# Adicionar Referencia
+## Parametros = ( Como comunicar = GET/POST) , ResponseFormat  = WebMessageFormat.Xml, UriTemplate = "addCliente/{nome};{cpf}"
+# Avisar o Servico que é acessivel pela Web
+# Advanced / Endpoint Behaviors
+# Criar Comportamento "web" , selecionar "webHttp"
+# Associar no endPoint
+# BehaviorsConfigurantion = web
+# Binding = webHttpBinding
+
+
+
+
+
+
+
+
+

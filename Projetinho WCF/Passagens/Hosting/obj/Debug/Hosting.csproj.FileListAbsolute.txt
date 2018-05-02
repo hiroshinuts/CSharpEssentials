@@ -1,0 +1,11 @@
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Hosting.exe.config
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Hosting.exe
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Hosting.pdb
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Passagens.dll
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Passagens.pdb
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\bin\Debug\Passagens.dll.config
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\obj\Debug\Hosting.csprojResolveAssemblyReference.cache
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\obj\Debug\Hosting.csproj.CoreCompileInputs.cache
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\obj\Debug\Hosting.csproj.CopyComplete
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\obj\Debug\Hosting.exe
+C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Hosting\obj\Debug\Hosting.pdb

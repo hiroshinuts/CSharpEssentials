@@ -12,8 +12,7 @@
   <system.serviceModel>
     <services>
       <service name="Passagens.ClienteService">
-        <endpoint address="cliente" behaviorConfiguration="web" binding="webHttpBinding"
-          bindingConfiguration="" contract="Passagens.IClienteService">
+        <endpoint address="cliente" binding="basicHttpBinding" contract="Passagens.IClienteService">
           <identity>
             <dns value="localhost" />
           </identity>
@@ -27,15 +26,15 @@
       </service>
     </services>
     <behaviors>
-      <endpointBehaviors>
-        <behavior name="web">
-          <webHttp />
-        </behavior>
-      </endpointBehaviors>
       <serviceBehaviors>
-        <behavior name="">
-          <serviceMetadata httpGetEnabled="true" httpsGetEnabled="true" />
-          <serviceDebug includeExceptionDetailInFaults="false" />
+        <behavior>
+          <!-- Para evitar a divulgação de informações de metadados, 
+          defina os valores abaixo para falso antes da implantação-->
+          <serviceMetadata httpGetEnabled="True" httpsGetEnabled="True"/>
+          <!-- Para receber detalhes de exceção em falhas para fins de depuração, 
+          defina o valor abaixo para verdadeiro. Defina para falto antes da implantação 
+          para evitar a divulgação de informações de exceção -->
+          <serviceDebug includeExceptionDetailInFaults="False" />
         </behavior>
       </serviceBehaviors>
     </behaviors>
