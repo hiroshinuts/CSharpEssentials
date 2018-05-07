@@ -12,16 +12,28 @@ namespace LojaAPIClient
     {
         static void Main(string[] args)
         {
-            string conteudo;
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://localhost:51257/api/carrinho/1");
-            request.Method = "GET";
-            request.Accept = "application/xml";
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://localhost:51257/api/carrinho/1/produto/6237/quantidade");
+            request.Method = "PUT";
 
+            string xml = "<Produto xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/Loja.Models'><Id>6237</Id><Nome>Videogame 4</Nome><Preco>4000</Preco><Quantidade>10</Quantidade></Produto>";
+            byte[] xmlytes = Encoding.UTF8.GetBytes(xml);
+            request.GetRequestStream().Write(xmlytes, 0, xml.Length);
+            request.ContentType = "application/xml";
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             Console.WriteLine(response.StatusCode);
-            Console.WriteLine(response.Headers["location"]);
+            Console.Read();
+        }
+
+        static void TestaDelete()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:51257/api/carrinho/1/produto/3467");
+            request.Method = "DELETE";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Console.WriteLine(response.StatusCode);
             Console.Read();
         }
 

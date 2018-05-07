@@ -15,8 +15,8 @@ namespace LojaAPI.Controllers
         {
             try
             {
-                CarrinhoDAO dao = new CarrinhoDAO();
-                Carrinho carrinho = dao.Busca(id);
+                var dao = new CarrinhoDAO();
+                var carrinho = dao.Busca(id);
                 return Request.CreateResponse(HttpStatusCode.OK, carrinho);
             }
             catch (KeyNotFoundException)
@@ -31,18 +31,40 @@ namespace LojaAPI.Controllers
         //FromBody , indica que as informações serão enviadas no corpo
         public HttpResponseMessage Post([FromBody]Carrinho carrinho)
         {
-            CarrinhoDAO dao = new CarrinhoDAO();
+            var dao = new CarrinhoDAO();
             dao.Adiciona(carrinho);
 
             //Resposta Universal HttpResponseMessage (200/400/500 etc)
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
             //Caminho onde a resposta aparecerá, "DefaultAPi" é pois só estamos utilizano uma no projeto, para determinar outras é
             // no App_Start/WebApiConfig.cs
-            string location = Url.Link("DefaultApi", new { controller = "carrinho", id = carrinho.Id});
+            string location = Url.Link("DefaultApi", new { controller = "carrinho", id = carrinho.Id });
             response.Headers.Location = new Uri(location);
 
             return response;
 
         }
+
+        //Para rotas alternativas, diferente do WebApiConfig.cs
+        [Route("api/carrinho/{idCarrinho}/produto/{idProduto}")]
+        public HttpResponseMessage Delete([FromUri]int idCarrinho, int idProduto)
+        {
+            CarrinhoDAO dao = new CarrinhoDAO();
+
+            var carrinho = dao.Busca(idCarrinho);
+            carrinho.Remove(idProduto);
+            return Request.CreateResponse(HttpStatusCode.OK);
+
+        }
+
+        [Route("api/carrinho/{idCarrinho}/produto/{idProduto}/quantidade")]
+        public HttpResponseMessage Put([FromBody]Produto produto, [FromUri] int idCarrinho, int idProduto)
+        {
+            var dao = new CarrinhoDAO();
+            var carrinho = dao.Busca(idCarrinho);
+            carrinho.TrocaQuantidade(produto);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }
