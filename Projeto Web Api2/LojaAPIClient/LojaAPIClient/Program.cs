@@ -14,6 +14,21 @@ namespace LojaAPIClient
         {
             string conteudo;
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://localhost:51257/api/carrinho/1");
+            request.Method = "GET";
+            request.Accept = "application/xml";
+
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.Headers["location"]);
+            Console.Read();
+        }
+
+        static void TestaPost2()
+        {
+            string conteudo;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:51257/api/carrinho/1");
             request.Method = "POST";
             request.Accept = "application/xml";
 
@@ -21,14 +36,12 @@ namespace LojaAPIClient
             byte[] xmlytes = Encoding.UTF8.GetBytes(xml);
             request.GetRequestStream().Write(xmlytes, 0, xml.Length);
             request.ContentType = "application/xml";
-            
-            WebResponse response = request.GetResponse();
-            using (Stream responseStream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                conteudo = reader.ReadToEnd();
-            }
-            Console.WriteLine(conteudo);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.Headers["location"]);
             Console.Read();
         }
 

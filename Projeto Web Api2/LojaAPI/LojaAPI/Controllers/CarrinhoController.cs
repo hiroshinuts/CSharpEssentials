@@ -11,19 +11,38 @@ namespace LojaAPI.Controllers
 {
     public class CarrinhoController : ApiController
     {
-        public Carrinho Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            CarrinhoDAO dao = new CarrinhoDAO();
-            Carrinho carrinho = dao.Busca(id);
-            return carrinho;
+            try
+            {
+                CarrinhoDAO dao = new CarrinhoDAO();
+                Carrinho carrinho = dao.Busca(id);
+                return Request.CreateResponse(HttpStatusCode.OK, carrinho);
+            }
+            catch (KeyNotFoundException)
+            {
+                string mensagem = string.Format("O carrinho {0} não foi encontrado", id);
+                HttpError error = new HttpError(mensagem);
+                return Request.CreateResponse(HttpStatusCode.NotFound, error);
+            }
+
         }
 
         //FromBody , indica que as informações serão enviadas no corpo
-        public string Post([FromBody]Carrinho carrinho)
+        public HttpResponseMessage Post([FromBody]Carrinho carrinho)
         {
             CarrinhoDAO dao = new CarrinhoDAO();
             dao.Adiciona(carrinho);
-            return "sucesso";
+
+            //Resposta Universal HttpResponseMessage (200/400/500 etc)
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+            //Caminho onde a resposta aparecerá, "DefaultAPi" é pois só estamos utilizano uma no projeto, para determinar outras é
+            // no App_Start/WebApiConfig.cs
+            string location = Url.Link("DefaultApi", new { controller = "carrinho", id = carrinho.Id});
+            response.Headers.Location = new Uri(location);
+
+            return response;
+
         }
     }
 }
