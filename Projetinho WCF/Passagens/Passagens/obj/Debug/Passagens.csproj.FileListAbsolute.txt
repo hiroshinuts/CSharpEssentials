@@ -1,7 +1,0 @@
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\bin\Debug\Passagens.dll.config
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\bin\Debug\Passagens.dll
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\bin\Debug\Passagens.pdb
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\obj\Debug\Passagens.csprojResolveAssemblyReference.cache
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\obj\Debug\Passagens.csproj.CoreCompileInputs.cache
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\obj\Debug\Passagens.dll
-C:\Users\Hiro\Desktop\C# Essencials\Projetinho WCF\Passagens\Passagens\obj\Debug\Passagens.pdb
