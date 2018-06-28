@@ -38,8 +38,12 @@ namespace DropDownList_Ajax.Controllers
             ViewBag.ItensDDLBD = items;
         }
 
-        private void LoadDDLStringPosicao(string itemSelecionado)
+        [HttpPost]
+        public JsonResult LoadDDLStringPosicao(string itemSelecionado)
         {
+            //Item selecionado é o item para buscar na tabela
+            //https://stackoverflow.com/questions/19737509/cant-use-returned-list-from-ajax-call
+
             List<string> listaString = new List<string>();
 
             listaString.Add("RetornoBdBabara");
@@ -57,9 +61,9 @@ namespace DropDownList_Ajax.Controllers
 
                 items.Add(sli);
             }
+                ViewBag.ItensDDLAJAX = items;
 
-            ViewBag.ItensDDLAJAX = items;
-
+            return Json(listaString, JsonRequestBehavior.AllowGet);
 
         }
         
@@ -75,10 +79,10 @@ namespace DropDownList_Ajax.Controllers
         public ActionResult ChamaDDL(string ItemSelecionadoDoPrimeiroDDL)
         {
             LoadDDLBancoDados();
-            LoadDDLStringPosicao(ItemSelecionadoDoPrimeiroDDL);
+            ViewBag.Dados = LoadDDLStringPosicao(ItemSelecionadoDoPrimeiroDDL);
 
 
-            return View("Index");
+            return View("Index", ViewBag.Dados);
         }
 
     }

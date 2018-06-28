@@ -19,44 +19,46 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>EntidadeFormulario</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>EntidadeFormulario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NAME, new SelectList(ViewBag.ItensDDLBD, "Text", "Value"), new { @class = "form-control", @Id = "ddl" })
+            </div>
+        </div>
+        @*@if (JavaScriptResult.Equals)
+        {
+        }
+        else
+        {
             <div class="form-group">
                 @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.NAME, new SelectList(ViewBag.ItensDDLBD, "Text", "Value"), new { @class = "form-control", @Id = "ddl" })
+                    @Html.DropDownListFor(model => model.NAME, new SelectList("ViewBag.Dados"), new { @class = "form-control", @Id = "ddl2" })
                 </div>
             </div>
-            @if (ViewBag.ItensDDLAJAX == null)
-            {
-            }
-            else
-            {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.NAME, new SelectList(ViewBag.ItensDDLAJAX, "Text", "Value"), new { @class = "form-control", @Id = "ddl2" })
-                    </div>
-                </div>
 
-            }
+        }*@
 
-            @*<div class="form-group">
-                    @Html.LabelFor(model => model.DropDown3, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.DropDown3, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>*@
+        <select id="ddlUm">
+            <option>--Selecione--</option>
+        </select>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+        <select id="ddlDois">
+            <option>--Selecione--</option>
+        </select>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+    </div>
     }
 
     <div>
@@ -66,19 +68,30 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript">
 
+        var list = {};
+
         $('#ddl').change(function(){
             $.ajax({
-            type:"POST",
-            url:'@Url.Action("ChamaDDL", "Home")',
-                data: { ItemSelecionadoDoPrimeiroDDL: $("#ddl > option:selected").attr("value")},
-            success: function (data){
-            var items= [];
-            $.each(data,function(){
-            items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
-            });
-            $("#icityid").html(items.join(' '));
-            }
+                type: "POST",
+                url: '@Url.Action("LoadDDLStringPosicao", "Home")',
+                dataType: "json"
             })
+                .done(function (data) {
+                    list = data;
+                    $("#ddlUm").empty();
+                    $("#ddlUm").prepend("<option value='' selected='selected'>--SELECIONE--</option>");
+                    $("#ddlDois").empty();
+                    $("#ddlDois").prepend("<option value='' selected='selected'>--SELECIONE--</option>");
+                    for (i = 0; i < list.length; i++) {
+                        $("#ddlDois").append("<option>" + list[i] + "</option>")
+                        $("#ddlUm").append("<option>" + list[i] + "</option>")
+                    }                   
+
+                });
+            $.ajax(list)
+            //.fail(function () {
+            //    alert("não foi possivel carregar os headers");
+            //});
         });
 
 
